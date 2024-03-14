@@ -94,7 +94,6 @@ function SetPassword($password)
     {
         $sanitizedUsername = self::$conn->quote($this->username);
 
-        // Search for the user in the database
         $selectQuery = "SELECT * FROM `gegevens` WHERE `username` = $sanitizedUsername";
         $result = self::$conn->query($selectQuery);
 
@@ -102,7 +101,6 @@ function SetPassword($password)
             $userData = $result->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($this->password, $userData['password'])) {
-                // Start session
                 session_start();
                 $_SESSION['username'] = $this->username;
                 header('location: index.php');
@@ -126,7 +124,6 @@ function SetPassword($password)
     {
         $sanitizedUsername = self::$conn->quote($username);
 
-        // Search for the user in the database
         $selectQuery = "SELECT * FROM `gegevens` WHERE `username` = $sanitizedUsername";
         $result = self::$conn->query($selectQuery);
 
@@ -149,6 +146,5 @@ function SetPassword($password)
     }
 }
 
-// Initialize the session
 session_start();
 ?>
